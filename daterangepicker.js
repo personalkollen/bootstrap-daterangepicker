@@ -363,10 +363,12 @@
         if (this.timePicker && this.autoApply)
             this.autoApply = false;
 
-        if (this.autoApply && typeof options.ranges !== 'object') {
-            this.container.find('.ranges').hide();
-        } else if (this.autoApply) {
-            this.container.find('.applyBtn, .cancelBtn').addClass('hide');
+        if (!this.allowSingleDate) {
+            if (this.autoApply && typeof options.ranges !== 'object') {
+                this.container.find('.ranges').hide();
+            } else if (this.autoApply) {
+                this.container.find('.applyBtn, .cancelBtn').addClass('hide');
+            }
         }
 
         if (this.singleDatePicker) {
