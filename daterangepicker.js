@@ -264,6 +264,9 @@
         if (typeof options.isInvalidDate === 'function')
             this.isInvalidDate = options.isInvalidDate;
 
+        if (typeof options.getAdditionalCSS === 'function')
+            this.getAdditionalCSS = options.getAdditionalCSS;
+
         if (typeof options.alwaysShowCalendars === 'boolean')
             this.alwaysShowCalendars = options.alwaysShowCalendars;
 
@@ -510,6 +513,10 @@
 
         isInvalidDate: function() {
             return false;
+        },
+
+        getAdditionalCSS: function() {
+            return null;
         },
 
         updateView: function() {
@@ -791,6 +798,10 @@
                     //don't allow selection of date if a custom function decides it's invalid
                     if (this.isInvalidDate(calendar[row][col]))
                         classes.push('off', 'disabled');
+
+                    var additionalClasses = this.getAdditionalCSS(calendar[row][col])
+                    if (additionalClasses)
+                        classes.concat(additionalClasses)
 
                     //highlight the currently selected start date
                     if (calendar[row][col].format('YYYY-MM-DD') == this.startDate.format('YYYY-MM-DD'))
