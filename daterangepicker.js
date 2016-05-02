@@ -801,9 +801,9 @@
                     if (this.isInvalidDate(calendar[row][col]))
                         classes.push('off', 'disabled');
 
-                    var additionalClasses = this.getAdditionalCSS(calendar[row][col])
+                    var additionalClasses = this.getAdditionalCSS(calendar[row][col]);
                     if (additionalClasses)
-                        classes.concat(additionalClasses)
+                        classes = classes.concat(additionalClasses);
 
                     //highlight the currently selected start date
                     if (calendar[row][col].format('YYYY-MM-DD') == this.startDate.format('YYYY-MM-DD'))
