@@ -67,6 +67,12 @@
                 </label>
               </div>
 
+             <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="allowSingleDate"> allowSingleDate
+                </label>
+              </div>
+
               <div class="checkbox">
                 <label>
                   <input type="checkbox" id="singleDatePicker"> singleDatePicker
@@ -285,6 +291,9 @@
           
           if ($('#autoApply').is(':checked'))
             options.autoApply = true;
+
+          if ($('#allowSingleDate').is(':checked'))
+            options.allowSingleDate = true;
 
           if ($('#dateLimit').is(':checked'))
             options.dateLimit = { days: 7 };

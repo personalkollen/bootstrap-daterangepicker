@@ -54,6 +54,7 @@
         this.linkedCalendars = true;
         this.autoUpdateInput = true;
         this.alwaysShowCalendars = false;
+        this.allowSingleDate = false;
         this.ranges = {};
 
         this.opens = 'right';
@@ -262,6 +263,9 @@
 
         if (typeof options.autoApply === 'boolean')
             this.autoApply = options.autoApply;
+
+        if (typeof options.allowSingleDate === 'boolean')
+            this.allowSingleDate = options.allowSingleDate;
 
         if (typeof options.autoUpdateInput === 'boolean')
             this.autoUpdateInput = options.autoUpdateInput;
@@ -1007,7 +1011,7 @@
 
         updateFormInputs: function() {
 
-            if (this.singleDatePicker || (this.endDate && (this.startDate.isBefore(this.endDate) || this.startDate.isSame(this.endDate)))) {
+            if (this.singleDatePicker || this.allowSingleDate || (this.endDate && (this.startDate.isBefore(this.endDate) || this.startDate.isSame(this.endDate)))) {
                 this.container.find('button.applyBtn').removeAttr('disabled');
             } else {
                 this.container.find('button.applyBtn').attr('disabled', 'disabled');
@@ -1349,6 +1353,9 @@
         },
 
         clickApply: function(e) {
+            if (this.allowSingleDate && !this.endDate) {
+                this.endDate = this.startDate.clone();
+            }
             this.hide();
             this.element.trigger('apply.daterangepicker', this);
         },
